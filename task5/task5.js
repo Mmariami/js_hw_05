@@ -7,8 +7,9 @@ class Car {
    * в консоль значения свойств maxSpeed, speed, isOn, distance и price.
    */
   
-    static getSpecs ({Car}){
-        console.log (Car.maxSpeed, Car.speed , Car.isOn , Car.distance , Car.price)
+    static getSpecs (Car){
+        console.log (`maxspped : ${Car.maxSpeed},speed : ${Car.speed}, car is on: ${Car.isOn}, 
+        distance : ${Car.distance}, price : ${Car.price}`)
     }
 
 
@@ -27,7 +28,7 @@ class Car {
             this.price = price;
             this.maxSpeed = maxSpeed;
             this.isOn = isOn;
-            isOn = 0 ;
+            isOn = true ;
             this.distance = distance;
             distance = 0 ;
   }
@@ -47,29 +48,46 @@ class Car {
    * Добавь код для того чтобы завести автомобиль
    * Записывает в свойство isOn значение true
    */
-  turnOn() {}
+  turnOn() {
+      this.isOn = true ;
+  }
   /*
    * Добавь код для того чтобы заглушить автомобиль
    * Записывает в свойство isOn значение false,
    * и сбрасывает текущую скорость в 0
    */
-  turnOff() {}
+  turnOff() {
+      this.isOn = false;
+      this.speed = 0 ;
+  }
   /*
    * Добавялет к свойству speed полученное значение,
    * при условии что результирующая скорость
    * не больше чем значение свойства maxSpeed
    */
-  accelerate(value) {}
+  accelerate(value) {
+      if (value < this.maxSpeed){
+        this.speed = value;
+      } return this.speed;
+  }
   /*
    * Отнимает от свойства speed полученное значение,
    * при условии что результирующая скорость не меньше нуля
    */
-  decelerate(value) {}
+  decelerate(value) {
+      if (this.speed - value > 0){
+          this.speed = this.speed - value;
+      } return this.speed;
+  }
   /*
    * Добавляет в поле distance киллометраж (hours * speed),
    * но только в том случае если машина заведена!
    */
-  drive(hours) {}
+  drive(hours) {
+      if (this.isOn) {
+        this.distance = hours * this.speed
+      } return this.distance
+  }
 }
 const mustang = new Car({ maxSpeed: 200, price: 2000 });
 mustang.turnOn();
